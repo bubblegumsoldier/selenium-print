@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Example HTML File</title>
+    <style>
+      /* Define a flexbox container */
+      .flex-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        background-color: #eee;
+        font-family: Arial, sans-serif;
+      }
+
+      /* Define flexbox items */
+      .flex-item {
+        width: 30%;
+        margin-bottom: 20px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        font-family: "Courier New", monospace;
+        font-size: 1.2em;
+        color: #333;
+        padding: 20px;
+      }
+
+      /* Define a grid container */
+      .grid-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-gap: 20px;
+        padding: 20px;
+        background-color: #eee;
+        font-family: Arial, sans-serif;
+      }
+
+      /* Define grid items */
+      .grid-item {
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        font-family: "Roboto", sans-serif;
+        font-size: 1.2em;
+        color: #333;
+        padding: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="flex-container">
+      <div class="flex-item">
+        <h2>Flexbox Item 1</h2>
+        <p>This is the first flexbox item.</p>
+      </div>
+      <div class="flex-item">
+        <h2>Flexbox Item 2</h2>
+        <p>This is the second flexbox item.</p>
+      </div>
+      <div class="flex-item">
+        <h2>Flexbox Item 3</h2>
+        <p>This is the third flexbox item.</p>
+      </div>
+    </div>
+
+    <div class="grid-container">
+      <div class="grid-item">
+        <h2>Grid Item 1</h2>
+        <p>This is the first grid item.</p>
+      </div>
+      <div class="grid-item">
+        <h2>Grid Item 2</h2>
+        <p>This is the second grid item.</p>
+      </div>
+      <div class="grid-item">
+        <h2>Grid Item 3</h2>
+        <p>This is the third grid item.</p>
+      </div>
+      <div class="grid-item">
+        <h2>Grid Item 4</h2>
+        <p>This is the fourth grid item.</p>
+      </div>
+      <div class="grid-item">
+        <h2>Grid Item 5</h2>
+        <p>This is the fifth grid item.</p>
+      </div>
+      <div class="grid-item">
+        <h2>Grid Item 6</h2>
+        <p>This is the sixth grid item.</p>
+      </div>
+    </div>
+  </body>
+</html>
