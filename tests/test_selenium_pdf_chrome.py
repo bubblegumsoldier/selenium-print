@@ -84,7 +84,7 @@ class SeleniumPDFTest(unittest.TestCase):
         selenium_pdf = SeleniumPDF(chrome_driver_path=CHROME_DRIVER_PATH, auto_start=False)
 
         # Driver in chrome driver must be None
-        self.assertFalse(hasattr(selenium_pdf.driver, 'driver'))
+        self.assertEqual(selenium_pdf.driver.driver, None)
 
         # Now init manually
         selenium_pdf.init()

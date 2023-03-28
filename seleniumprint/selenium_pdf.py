@@ -1,5 +1,4 @@
 from typing import List, Union
-from selenium import webdriver
 
 from seleniumprint.drivers import ISeleniumPDFDriver, ChromePDFDriver
 
@@ -28,11 +27,11 @@ class SeleniumPDF:
 
     def __init__(
         self,
-        pdf_driver: ISeleniumPDFDriver = None,
-        additional_browser_options: dict = {},
-        additional_arguments: List[str] = [],
-        auto_start: bool = True,
         *args,
+        pdf_driver: ISeleniumPDFDriver = None,
+        additional_browser_options: Union[dict, None] = None,
+        additional_arguments: Union[List[str], None] = None,
+        auto_start: bool = True,
         **kwargs,
     ):
         """
@@ -49,8 +48,8 @@ class SeleniumPDF:
         self.driver = pdf_driver
         if not self.driver:
             self.driver = ChromePDFDriver()
-        self.additional_browser_options = additional_browser_options
-        self.additional_arguments = additional_arguments
+        self.additional_browser_options = additional_browser_options or {}
+        self.additional_arguments = additional_arguments or []
         self.extra_args = args
         self.extra_kwargs = kwargs
         if not auto_start:
@@ -88,7 +87,9 @@ class SeleniumPDF:
         with open(file_path, "wb") as f:
             f.write(raw_bytes)
 
-    def convert_current_page_to_pdf(self, output_path=None) -> Union[bytes, None]:
+    def convert_current_page_to_pdf(
+        self, output_path=None
+    ) -> Union[bytes, None]:
         """
         Converts the current page to a PDF.
 
@@ -102,6 +103,7 @@ class SeleniumPDF:
         if not output_path:
             return raw_bytes
         self._save_bytes_to_file(raw_bytes, output_path)
+        return None
 
     def url_to_pdf(self, url, output_path=None, auto_quit=True):
         """
@@ -122,8 +124,10 @@ class SeleniumPDF:
 
     def file_to_pdf(self, file_path, output_path=None, auto_quit=True):
         return self.url_to_pdf(
-            _file_path_to_url(file_path), output_path=output_path, auto_quit=auto_quit
+            _file_path_to_url(file_path),
+            output_path=output_path,
+            auto_quit=auto_quit,
         )
-    
+
     def quit(self):
         self.driver.quit()

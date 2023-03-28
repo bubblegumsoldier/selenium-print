@@ -1,10 +1,11 @@
 from abc import ABC, abstractmethod
 
+
 class ISeleniumPDFDriver(ABC):
     @abstractmethod
     def init_driver(self, browser_options, *args, **kwargs):
         pass
-    
+
     @abstractmethod
     def load_page(self, url, *args, **kwargs):
         pass

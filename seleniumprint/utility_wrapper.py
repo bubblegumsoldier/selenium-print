@@ -5,19 +5,19 @@ from .selenium_pdf import SeleniumPDF
 
 def url_to_pdf(
     url: str,
+    *args,
     output_path: Union[str, None] = None,
     pdf_driver: ISeleniumPDFDriver = ChromePDFDriver(),
-    additional_browser_options: dict = {},
-    additional_arguments: List[str] = [],
-    *args,
+    additional_browser_options: Union[dict, None] = None,
+    additional_arguments: Union[List[str], None] = None,
     **kwargs,
 ) -> Union[bytes, None]:
     driver = SeleniumPDF(
+        *args,
         pdf_driver=pdf_driver,
         additional_browser_options=additional_browser_options,
         additional_arguments=additional_arguments,
         auto_start=True,
-        *args,
         **kwargs,
     )
     return driver.url_to_pdf(url=url, output_path=output_path)
@@ -25,19 +25,19 @@ def url_to_pdf(
 
 def file_to_pdf(
     file_path: str,
+    *args,
     output_path: Union[str, None] = None,
     pdf_driver: ISeleniumPDFDriver = ChromePDFDriver(),
-    additional_browser_options: dict = {},
-    additional_arguments: List[str] = [],
-    *args,
+    additional_browser_options: Union[dict, None] = None,
+    additional_arguments: Union[List[str], None] = None,
     **kwargs,
 ) -> Union[bytes, None]:
     driver = SeleniumPDF(
+        *args,
         pdf_driver=pdf_driver,
         additional_browser_options=additional_browser_options,
         additional_arguments=additional_arguments,
         auto_start=True,
-        *args,
         **kwargs,
     )
     return driver.file_to_pdf(file_path=file_path, output_path=output_path)

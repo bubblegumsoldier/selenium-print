@@ -1,17 +1,21 @@
 import base64
-from .i_selenium_pdf_driver import ISeleniumPDFDriver
+from typing import Union
+import json
 from selenium import webdriver
 from selenium.webdriver.chrome.service import DEFAULT_EXECUTABLE_PATH
-import json
+from .i_selenium_pdf_driver import ISeleniumPDFDriver
 
 class ChromePDFDriver(ISeleniumPDFDriver):
+    driver = None
     def init_driver(
         self,
-        additional_browser_options: dict = {},
-        additional_arguments: list[str] = [],
         *args,
+        additional_browser_options: Union[dict, None] = None,
+        additional_arguments: Union[list[str], None] = None,
         **kwargs
     ):
+        additional_browser_options = additional_browser_options or {}
+        additional_arguments = additional_arguments or []
         chrome_options = webdriver.ChromeOptions()
         for key in additional_browser_options:
             setattr(chrome_options, key, additional_browser_options[key])
@@ -36,14 +40,14 @@ class ChromePDFDriver(ISeleniumPDFDriver):
             executable_path=chrome_driver_path, options=chrome_options
         )
 
-    def load_page(self, url):
+    def load_page(self, url, *args, **kwargs):
         self.driver.get(url)
 
-    def convert_current_page_to_pdf(self):
+    def convert_current_page_to_pdf(self, *args, **kwargs):
         self.driver.execute_script("return window.print()")
         pdf = self.driver.execute_cdp_cmd("Page.printToPDF", {"printBackground": True})
         pdf_data = base64.b64decode(pdf["data"])
         return pdf_data
 
-    def quit(self):
+    def quit(self, *args, **kwargs):
         self.driver.quit()
