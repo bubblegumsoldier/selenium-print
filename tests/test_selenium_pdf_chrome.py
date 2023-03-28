@@ -32,8 +32,7 @@ class SeleniumPDFTest(unittest.TestCase):
         # Assert that PDF file was created
         self.assertTrue(os.path.isfile(pdf_file_path))
 
-        # Remove PDF file
-        os.remove(pdf_file_path)
+        # Won't remove pdf as it will be an artifact in the actions
 
     def test_generate_pdf_with_bytes_returned(self):
         # Get absolute path to current script
