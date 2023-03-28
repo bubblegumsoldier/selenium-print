@@ -33,7 +33,6 @@ jobs:
           CI: true
       - name: Display coverage report
         uses: actions/upload-artifact@v2
-        if: startsWith(github.ref, 'refs/tags/')
         with:
           name: coverage-report
           path: htmlcov
