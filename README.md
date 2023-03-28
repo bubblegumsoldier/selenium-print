@@ -21,9 +21,27 @@ pip install selenium-print
 
 ## Usage
 
-### Simple Usage
+### Simple usage
 
-The simplest way to use SeleniumPDF is to call the url_to_pdf method with a URL and an optional output file path:
+The simplest way to use selenium-print is to use the utility method that wraps all logic.
+
+```python
+from seleniumprint import file_to_pdf
+
+input_html_file_path="/Users/user/path/to/input.html"
+output_pdf_file_path="/Users/user/path/to/output.pdf"
+
+file_to_pdf(input_html_file_path, output_pdf_file_path)
+
+input_html_url="http://localhost:8000/report/1"
+output_pdf_file_path="./report_pdfs"
+
+url_to_pdf(input_html_url, output_pdf_file_path)
+```
+
+### Class-Based Usage
+
+Another way to use SeleniumPDF is to call the url_to_pdf method with a URL and an optional output file path:
 
 ```python
 from seleniumprint import SeleniumPDF
@@ -42,7 +60,7 @@ In this example, `SeleniumPDF` is initialized with the default options and the `
 
 ### Custom Waiting
 
-If you need to wait for some time after loading the page before converting it to a PDF, you can use the `load_page` and `convert_current_page_to_pdf` methods separately and add a sleep in between. Here's an example:
+If you need to wait for some time after loading the page before converting it to a PDF, you can use the `load_page` and `convert_current_page_to_pdf` methods separately and add a sleep in between or some other kind of waiting logic, e.g. a JS based logic. Here's an example:
 
 ```python
 from seleniumprint import SeleniumPDF
@@ -60,9 +78,36 @@ time.sleep(5)
 
 # Convert page to PDF and save to file
 selenium_pdf.convert_current_page_to_pdf(pdf_file_path)
+
+## Alternative JS-based waiting (needs appropriate HTML-side implementation)
+
+selenium_pdf.load_page(url)
+
+# wait manually until page is ready or some other condition is true
+while selenium_pdf.driver.driver.execute_js("return window.readyState !== 'complete'"):
+  time.sleep(0.5)
+
+# Convert page to pdf now
+selenium_pdf.convert_current_page_to_pdf(pdf_file_path)
+
 ```
 
 In this example, `load_page` is called to load the page at the specified URL, and then a 5-second wait is added using the `time.sleep` function. Finally, `convert_current_page_to_pdf` is called to convert the loaded page to a PDF and save it to the specified file path.
+
+### Specifying chromedriver location
+
+The constructor of `SeleniumPDF` as well as the utility method `file_to_pdf` and `url_to_pdf` take a chrome-driver specific argument called `chrome_driver_path`.
+
+```python
+# Build path to HTML file relative to current script
+html_file_path = os.path.join(script_dir, "test.html")
+
+# Build path to output PDF file
+pdf_file_path = os.path.join(script_dir, "test_direct.pdf")
+
+# Generate PDF from HTML File Path
+file_to_pdf(html_file_path, pdf_file_path, chrome_driver_path=CHROME_DRIVER_PATH)
+```
 
 ## Contributing
 

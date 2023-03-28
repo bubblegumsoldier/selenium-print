@@ -4,6 +4,10 @@ from selenium import webdriver
 from seleniumprint.drivers import ISeleniumPDFDriver, ChromePDFDriver
 
 
+def _file_path_to_url(file_path: str) -> str:
+    return f"file://{file_path}"
+
+
 class SeleniumPDF:
     """
     A class for rendering HTML to PDF using the Selenium framework.
@@ -15,6 +19,7 @@ class SeleniumPDF:
         extra_args: Extra arguments to pass to the driver initialization.
         extra_kwargs: Extra keyword arguments to pass to the driver initialization.
     """
+
     driver: ISeleniumPDFDriver = None
     additional_browser_options: dict = None
     additional_arguments: dict = None
@@ -23,12 +28,12 @@ class SeleniumPDF:
 
     def __init__(
         self,
-        pdf_driver: ISeleniumPDFDriver = ChromePDFDriver(),
+        pdf_driver: ISeleniumPDFDriver = None,
         additional_browser_options: dict = {},
         additional_arguments: List[str] = [],
         auto_start: bool = True,
         *args,
-        **kwargs
+        **kwargs,
     ):
         """
         Initializes a new instance of the SeleniumPDF class.
@@ -42,6 +47,8 @@ class SeleniumPDF:
             **kwargs: Extra keyword arguments to pass to the driver initialization.
         """
         self.driver = pdf_driver
+        if not self.driver:
+            self.driver = ChromePDFDriver()
         self.additional_browser_options = additional_browser_options
         self.additional_arguments = additional_arguments
         self.extra_args = args
@@ -57,9 +64,10 @@ class SeleniumPDF:
         self.driver.init_driver(
             self.additional_browser_options,
             self.additional_arguments,
-            *self.extra_args, **self.extra_kwargs
+            *self.extra_args,
+            **self.extra_kwargs,
         )
-    
+
     def load_page(self, url):
         """
         Loads the specified URL in the driver.
@@ -77,7 +85,7 @@ class SeleniumPDF:
             raw_bytes (bytes): The raw bytes to save.
             file_path (str): The file path to save to.
         """
-        with open(file_path, 'wb') as f:
+        with open(file_path, "wb") as f:
             f.write(raw_bytes)
 
     def convert_current_page_to_pdf(self, output_path=None) -> Union[bytes, None]:
@@ -111,3 +119,11 @@ class SeleniumPDF:
         if auto_quit:
             self.driver.quit()
         return result
+
+    def file_to_pdf(self, file_path, output_path=None, auto_quit=True):
+        return self.url_to_pdf(
+            _file_path_to_url(file_path), output_path=output_path, auto_quit=auto_quit
+        )
+    
+    def quit(self):
+        self.driver.quit()
