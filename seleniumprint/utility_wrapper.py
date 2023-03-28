@@ -5,8 +5,8 @@ from .selenium_pdf import SeleniumPDF
 
 def url_to_pdf(
     url: str,
+    output_path: Union[str, None],
     *args,
-    output_path: Union[str, None] = None,
     pdf_driver: ISeleniumPDFDriver = ChromePDFDriver(),
     additional_browser_options: Union[dict, None] = None,
     additional_arguments: Union[List[str], None] = None,
@@ -25,8 +25,8 @@ def url_to_pdf(
 
 def file_to_pdf(
     file_path: str,
+    output_path: Union[str, None],
     *args,
-    output_path: Union[str, None] = None,
     pdf_driver: ISeleniumPDFDriver = ChromePDFDriver(),
     additional_browser_options: Union[dict, None] = None,
     additional_arguments: Union[List[str], None] = None,
