@@ -2,7 +2,7 @@
 
 `selenium-print` is an open-source Python package that enables printing HTML to PDF using the Selenium framework. This package is especially useful when you want to render dynamic content that requires a JS engine or ajax calls to a server or complex layouts using state-of-the-art CSS like grid, flexbox, media queries or transform.
 
-Note: This libraryuses [selenium](https://github.com/SeleniumHQ/selenium) which in turn requires the installation of the Google Chrome browser as well as a chromedriver. This librarydoes not support any other browser at the moment. This makes it **not a lightweight solution** for generating PDF files. But it does make an easy to setup PDF generation solution that supports ALL browser functionality. Also note that starting a selenium browser is not very fast either, so if your priority is not ease-of-use, but performance, this is not the library for you. Although in benchmarks with [weasyprint](https://github.com/Kozea/WeasyPrint), which seems to also have one of the most impressive HTML/CSS support, this framework beat it by an average of 33% time decrease.
+Note: This library uses [selenium](https://github.com/SeleniumHQ/selenium) which in turn requires the installation of the Google Chrome browser as well as a chromedriver. This librarydoes not support any other browser at the moment. This makes it **not a lightweight solution** for generating PDF files. But it does make an easy to setup PDF generation solution that supports ALL browser functionality. Also note that starting a selenium browser is not very fast either, so if your priority is not ease-of-use, but performance, this is not the library for you. Although in benchmarks with [weasyprint](https://github.com/Kozea/WeasyPrint), which seems to also have one of the most impressive HTML/CSS support, this framework beat it by an average of 33% time decrease.
 
 ## Features
 
@@ -20,7 +20,6 @@ pip install selenium-print
 ```
 
 ## Usage
-
 
 ### Simple Usage
 
@@ -64,7 +63,6 @@ selenium_pdf.convert_current_page_to_pdf(pdf_file_path)
 ```
 
 In this example, `load_page` is called to load the page at the specified URL, and then a 5-second wait is added using the `time.sleep` function. Finally, `convert_current_page_to_pdf` is called to convert the loaded page to a PDF and save it to the specified file path.
-
 
 ## Contributing
 
