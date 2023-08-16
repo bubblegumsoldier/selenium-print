@@ -2,7 +2,7 @@
 
 `selenium-print` is an open-source Python package that enables printing HTML to PDF using the Selenium framework. This package is especially useful when you want to render dynamic content that requires a JS engine or ajax calls to a server or complex layouts using state-of-the-art CSS like grid, flexbox, media queries or transform.
 
-Note: This library uses [selenium](https://github.com/SeleniumHQ/selenium) which in turn requires the installation of the Google Chrome browser as well as a chromedriver. This librarydoes not support any other browser at the moment. This makes it **not a lightweight solution** for generating PDF files. But it does make an easy to setup PDF generation solution that supports ALL browser functionality. Also note that starting a selenium browser is not very fast either, so if your priority is not ease-of-use, but performance, this is not the library for you. Although in benchmarks with [weasyprint](https://github.com/Kozea/WeasyPrint), which seems to also have one of the most impressive HTML/CSS support, this framework beat it by an average of 33% time decrease.
+Note: This library uses [selenium](https://github.com/SeleniumHQ/selenium) which in turn requires the installation of the Google Chrome browser as well as a chromedriver. This library does not support any other browser at the moment. This makes it **not a lightweight solution** for generating PDF files. But it does make an easy to setup PDF generation solution that supports ALL browser functionality. Also note that starting a selenium browser is not very fast either, so if your priority is not ease-of-use, but performance, this is not the library for you. Although in benchmarks with [weasyprint](https://github.com/Kozea/WeasyPrint), which seems to also have one of the most impressive HTML/CSS support, this framework beat it by an average of 33% time decrease.
 
 ## Features
 
@@ -26,7 +26,7 @@ pip install selenium-print
 The simplest way to use selenium-print is to use the utility method that wraps all logic.
 
 ```python
-from seleniumprint import file_to_pdf
+from seleniumprint import file_to_pdf, url_to_pdf
 
 input_html_file_path="/Users/user/path/to/input.html"
 output_pdf_file_path="/Users/user/path/to/output.pdf"
